@@ -82,7 +82,15 @@ llama3.2:1b          — generates a grounded answer from the retrieved context
 - Python 3.10+
 - [Ollama](https://ollama.com) installed and running
 
-Pull the two required models:
+**Start the Ollama server** (must be running before you use the app):
+
+```bash
+ollama serve
+```
+
+> On macOS, Ollama also starts automatically if you launched the desktop app from Applications. On Linux you always need to run `ollama serve` manually. Leave this terminal open.
+
+Pull the two required models (one-time, run in a new terminal):
 
 ```bash
 ollama pull nomic-embed-text   # embeddings
