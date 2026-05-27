@@ -5,4 +5,5 @@ CHUNK_SIZE = 500
 CHUNK_OVERLAP = 50
 CHROMA_DB_PATH = "./chroma_db"
 COLLECTION_NAME = "docwizard"
-TOP_K = 8  # increased from 5 — nomic-embed-text ranks similar topics closely, wider net helps
+TOP_K = 8      # how many chunks to retrieve from ChromaDB (wide net for recall)
+LLM_TOP_K = 3  # how many of those chunks to pass to the LLM (small models need tight context)
