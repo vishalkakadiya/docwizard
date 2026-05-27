@@ -1,7 +1,7 @@
 import streamlit as st
 import tempfile
 import os
-from ingest import ingest_pdf
+from ingest import ingest_pdf, clear_collection
 from query import answer
 
 st.set_page_config(page_title="DocWizard", page_icon="📄")
@@ -22,6 +22,13 @@ with st.sidebar:
                 count = ingest_pdf(tmp_path)
             os.unlink(tmp_path)
             st.success(f"{uploaded_file.name}: {count} new chunks added")
+
+    st.divider()
+    st.subheader("Manage DB")
+    if st.button("🗑️ Clear all chunks", type="secondary"):
+        removed = clear_collection()
+        st.session_state.messages = []
+        st.success(f"Cleared {removed} chunks. Chat history reset.")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []

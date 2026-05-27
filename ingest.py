@@ -10,6 +10,14 @@ def get_collection():
     client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
     return client.get_or_create_collection(COLLECTION_NAME)
 
+def clear_collection() -> int:
+    client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
+    collection = client.get_or_create_collection(COLLECTION_NAME)
+    count = collection.count()
+    client.delete_collection(COLLECTION_NAME)
+    client.get_or_create_collection(COLLECTION_NAME)  # recreate empty
+    return count
+
 def ingest_pdf(pdf_path: str) -> int:
     loader = PyPDFLoader(pdf_path)
     pages = loader.load()
