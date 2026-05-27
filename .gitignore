@@ -8,6 +8,15 @@ __pycache__/
 .venv/
 venv/
 *.egg-info/
+.pytest_cache/
 
-# Env
+# Env / secrets
 .env
+*.key
+*.pem
+
+# Internal planning docs (not relevant to public repo)
+docs/superpowers/
+
+# macOS
+.DS_Store
