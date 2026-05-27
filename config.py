@@ -5,4 +5,4 @@ CHUNK_SIZE = 500
 CHUNK_OVERLAP = 50
 CHROMA_DB_PATH = "./chroma_db"
 COLLECTION_NAME = "docwizard"
-TOP_K = 5
+TOP_K = 8  # increased from 5 — nomic-embed-text ranks similar topics closely, wider net helps

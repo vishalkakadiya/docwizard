@@ -13,7 +13,7 @@ def search(question: str) -> list[str]:
     collection = get_collection()
     if collection.count() == 0:
         return []
-    embedding = get_embedding(question)
+    embedding = get_embedding(question, task_type="search_query")
     results = collection.query(
         query_embeddings=[embedding],
         n_results=min(TOP_K, collection.count())

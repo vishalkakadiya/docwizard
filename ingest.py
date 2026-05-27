@@ -70,7 +70,7 @@ def ingest_pdf(pdf_path: str) -> int:
         if collection.get(ids=[chunk_id])["ids"]:
             continue
 
-        embedding = get_embedding(chunk.page_content)
+        embedding = get_embedding(chunk.page_content, task_type="search_document")
 
         collection.add(
             ids=[chunk_id],
