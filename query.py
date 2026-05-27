@@ -3,9 +3,11 @@ import chromadb
 from embeddings import get_embedding
 from config import CHROMA_DB_PATH, COLLECTION_NAME, TOP_K, OLLAMA_BASE_URL, LLM_MODEL
 
+COSINE = {"hnsw:space": "cosine"}
+
 def get_collection():
     client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
-    return client.get_or_create_collection(COLLECTION_NAME)
+    return client.get_or_create_collection(COLLECTION_NAME, metadata=COSINE)
 
 def search(question: str) -> list[str]:
     collection = get_collection()

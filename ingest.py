@@ -6,16 +6,18 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from embeddings import get_embedding
 from config import CHROMA_DB_PATH, COLLECTION_NAME, CHUNK_SIZE, CHUNK_OVERLAP
 
+COSINE = {"hnsw:space": "cosine"}
+
 def get_collection():
     client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
-    return client.get_or_create_collection(COLLECTION_NAME)
+    return client.get_or_create_collection(COLLECTION_NAME, metadata=COSINE)
 
 def clear_collection() -> int:
     client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
-    collection = client.get_or_create_collection(COLLECTION_NAME)
+    collection = client.get_or_create_collection(COLLECTION_NAME, metadata=COSINE)
     count = collection.count()
     client.delete_collection(COLLECTION_NAME)
-    client.get_or_create_collection(COLLECTION_NAME)  # recreate empty
+    client.get_or_create_collection(COLLECTION_NAME, metadata=COSINE)  # recreate empty
     return count
 
 def ingest_pdf(pdf_path: str) -> int:
